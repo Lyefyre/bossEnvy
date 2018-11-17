@@ -1,5 +1,4 @@
-const express = require('express');
-const minionsRouter = express.Router();
+const minionsRouter = require('express').Router();
 module.exports = minionsRouter;
 
 const { getAllFromDatabase, getFromDatabaseById, addToDatabase,
