@@ -5,10 +5,10 @@ const { getAllFromDatabase, getFromDatabaseById, addToDatabase,
         updateInstanceInDatabase, deleteFromDatabasebyId, deleteAllFromDatabase } = require('./db');
 
 // Minion Middleware
-minionsRouter.param('/:minionId', (req, res, next, id) => {
-    const minions = getFromDatabaseById('minions', id);
-    if (minions) {
-        req.minions = minions;
+minionsRouter.param('minionId', (req, res, next, id) => {
+    const minion = getFromDatabaseById('minions', id);
+    if (minion) {
+        req.minion = minion;
         next();
     } else {
         res.status(404).send();
@@ -30,7 +30,7 @@ minionsRouter.post('/', (req, res, next) => {
 // Getting a single minion
 minionsRouter.get('/:minionId', (req, res, next) => {
     console.log("Recieved GET Request");
-    res.send(req.minions);
+    res.send(req.minion);
 });
 
 // Updating a single minion
@@ -73,12 +73,13 @@ minionsRouter.get('/:minionId/work', (req, res, next) => {
 minionsRouter.post('/minionId/work', (req, res, next) => {
    console.log("POST WORK Request recieved");
    const newMinionWork = addToDatabase('minions', req.body);
+   res.status(201).send(newMinionWork);
 });
 
 // Update a single Minion Work
 minionsRouter.put('/minionId/work', (req, res, next) => {
     console.log("PUT WORK Request recieved");
-    const updateMinionWork = pdateInstanceInDatabase('minions', req.body);
+    const updateMinionWork = updateInstanceInDatabase('minions', req.body);
     res.send(updateMinionWork);
 });
 

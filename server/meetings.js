@@ -8,18 +8,18 @@ const { addToDatabase,
     getAllFromDatabase
 } = require('./db');
 
-// Get a single Meeting
+// Get all Meetings
 meetingsRouter.get('/', (req, res, next) => {
     res.send(getAllFromDatabase('meetings'));
 });
 
-// Update a meeting
+// Add new meetings
 meetingsRouter.post('/', (req, res, next) => {
     const newMeeting = addToDatabase('meetings', createMeeting());
     res.status(201).send(newMeeting);
 });
 
-// Delete a meeting
+// Delete all meetings
 meetingsRouter.delete('/', (req, res, next) => {
     res.status(204).send(deleteAllFromDatabase('meetings'));
 });
