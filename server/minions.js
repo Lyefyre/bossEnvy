@@ -7,9 +7,9 @@ const { getAllFromDatabase, getFromDatabaseById, addToDatabase,
 
 // Minion Middleware
 minionsRouter.param('/:minionId', (req, res, next, id) => {
-    const minion = getFromDatabaseById('minions', id);
-    if (minion) {
-        req.minions = minion;
+    const minions = getFromDatabaseById('minions', id);
+    if (minions) {
+        req.minions = minions;
         next();
     } else {
         res.status(404).send();
@@ -34,12 +34,14 @@ minionsRouter.get('/:minionId', (req, res, next) => {
     res.send(req.minion);
 });
 
+// Updating a single minion
 minionsRouter.put('/:minionId', (req, res, next) => {
     console.log("Recieved PUT Request");
     const updateMinion = updateInstanceInDatabase('minions', req.body);
     res.send(updateMinion);
 });
 
+// Delete a single minion
 minionsRouter.delete('/:minionId', (req, res, next) => {
     console.log("Recieved DEL Request");
     const delMinion = deleteFromDatabasebyId('minions', req.params.minionId);
@@ -49,4 +51,45 @@ minionsRouter.delete('/:minionId', (req, res, next) => {
         res.status(500);
     }
     res.send();
+});
+
+// Minion Work Middleware
+minionsRouter.param('/:minionId/work', (req, res, next, id) => {
+    const minionWork = getFromDatabaseById('minions', id);
+    if (minionWork) {
+        req.minionWork = minionWork;
+        next();
+    } else {
+        res.status(404).send();
+    }
+});
+
+// Get all Minion Works
+minionsRouter.get('/:minionId/work', (req, res, next) => {
+   console.log("GET WORK Request recieved");
+   res.send(getAllFromDatabase('minions'));
+});
+
+// Add an Array of Minion Works
+minionsRouter.post('/minionId/work', (req, res, next) => {
+   console.log("POST WORK Request recieved");
+   const newMinionWork = addToDatabase('minions', req.body);
+});
+
+// Update a single Minion Work
+minionsRouter.put('/minionId/work', (req, res, next) => {
+    console.log("PUT WORK Request recieved");
+    const updateMinionWork = pdateInstanceInDatabase('minions', req.body);
+    res.send(updateMinionWork);
+});
+
+// Delete a single Minion Work
+minionsRouter.delete('/minionId/work', (req, res, next) => {
+   console.log("DEL WORK Request recieved");
+   const delMinionWork = deleteFromDatabasebyId('minions', req.params.minionId)
+   if (delMinionWork){
+       res.status(204);
+   } else {
+       res.status(500);
+   }
 });
