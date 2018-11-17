@@ -30,7 +30,7 @@ minionsRouter.post('/', (req, res, next) => {
 // Getting a single minion
 minionsRouter.get('/:minionId', (req, res, next) => {
     console.log("Recieved GET Request");
-    res.send(req.minion);
+    res.send(req.minions);
 });
 
 // Updating a single minion
