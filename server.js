@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-console.log(express)
+console.log(express);
 
 module.exports = app;
 
@@ -26,9 +26,8 @@ app.use('/api', apiRouter);
 // This conditional is here for testing purposes:
 if (!module.parent) { 
   // Add your code to start the server listening at PORT below:
+    app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`);
+    });
 
 }
-
-app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
-});
