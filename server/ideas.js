@@ -33,7 +33,7 @@ ideasRouter.post('/', checkMillionDollarIdea, (req, res, next) => {
 });
 
 ideasRouter.get('/:ideaId', (req, res, next) => {
-    res.send(req.idea);
+    res.send(req.ideas);
 });
 
 ideasRouter.put('/:ideaId', checkMillionDollarIdea, (req, res, next) => {
