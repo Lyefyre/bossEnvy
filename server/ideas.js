@@ -11,6 +11,7 @@ const {
 
 const checkMillionDollarIdea = require('./checkMillionDollarIdea');
 
+// Meetings Middleware
 ideasRouter.param('ideaId', (req, res, next, id) => {
     const ideas = getFromDatabaseById('ideas', id);
     if (ideas) {
@@ -21,6 +22,7 @@ ideasRouter.param('ideaId', (req, res, next, id) => {
     }
 });
 
+// Get all Meetings
 ideasRouter.get('/', (req, res, next) => {
     res.send(getAllFromDatabase('ideas'));
 });
